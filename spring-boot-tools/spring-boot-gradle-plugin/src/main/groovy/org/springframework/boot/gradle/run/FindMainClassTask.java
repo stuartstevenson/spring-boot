@@ -56,13 +56,6 @@ public class FindMainClassTask extends DefaultTask {
 			mainClass = bootExtension.getMainClass();
 		}
 
-		ApplicationPluginConvention application = (ApplicationPluginConvention) project
-				.getConvention().getPlugins().get("application");
-		// Try the Application extension setting
-		if (mainClass == null && application.getMainClassName() != null) {
-			mainClass = application.getMainClassName();
-		}
-
 		Task runTask = getProject().getTasks().getByName("run");
 		if (mainClass == null && runTask.hasProperty("main")) {
 			mainClass = (String) runTask.property("main");
@@ -90,9 +83,6 @@ public class FindMainClassTask extends DefaultTask {
 
 		if (bootExtension.getMainClass() == null) {
 			bootExtension.setMainClass(mainClass);
-		}
-		if (application.getMainClassName() == null) {
-			application.setMainClassName(mainClass);
 		}
 		if (!runTask.hasProperty("main")) {
 			runTask.setProperty("main", mainClass);

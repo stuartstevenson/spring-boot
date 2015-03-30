@@ -41,7 +41,6 @@ class SpringBootPlugin implements Plugin<Project> {
 		project.getExtensions().create("springBoot", SpringBootPluginExtension)
 
 		project.getPlugins().apply(JavaPlugin)
-		project.getPlugins().apply(ApplicationPlugin)
 
 		new AgentPluginFeatures().apply(project)
 		new RepackagePluginFeatures().apply(project)
