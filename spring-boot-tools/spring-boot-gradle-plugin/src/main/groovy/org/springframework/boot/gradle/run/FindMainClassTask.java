@@ -56,11 +56,6 @@ public class FindMainClassTask extends DefaultTask {
 			mainClass = bootExtension.getMainClass();
 		}
 
-		Task runTask = getProject().getTasks().getByName("run");
-		if (mainClass == null && runTask.hasProperty("main")) {
-			mainClass = (String) runTask.property("main");
-		}
-
 		if (mainClass == null) {
 			// Search
 			SourceSet mainSourceSet = SourceSets.findMainSourceSet(project);
@@ -83,9 +78,6 @@ public class FindMainClassTask extends DefaultTask {
 
 		if (bootExtension.getMainClass() == null) {
 			bootExtension.setMainClass(mainClass);
-		}
-		if (!runTask.hasProperty("main")) {
-			runTask.setProperty("main", mainClass);
 		}
 
 		return mainClass;
